@@ -43,6 +43,13 @@ class Post extends Model implements HasMedia
         'publish_date',
     ];
 
+    public static function boot()
+    {
+        parent::boot();
+
+        Post::observe(new \App\Observers\PostActionObserver);
+    }
+
     public function registerMediaConversions(Media $media = null)
     {
         $this->addMediaConversion('thumb')->width(50)->height(50);

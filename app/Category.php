@@ -32,6 +32,13 @@ class Category extends Model implements HasMedia
         'deleted_at',
     ];
 
+    public static function boot()
+    {
+        parent::boot();
+
+        Category::observe(new \App\Observers\CategoryActionObserver);
+    }
+
     public function registerMediaConversions(Media $media = null)
     {
         $this->addMediaConversion('thumb')->width(50)->height(50);
